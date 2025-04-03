@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project UTS - ILO Mates</title>
     <style type="text/css">
+        /* Form structure */
        div{
         display: flex; 
         justify-content:space-evenly; 
@@ -15,6 +16,7 @@
 </head>
 <body>
     <div>
+        <!-- container for form -->
         <form action="hasil.php" method="post">
             <input type="submit" value="Lihat hasil" name="hasil">
         </form>
