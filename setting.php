@@ -73,18 +73,16 @@ if (isset($_POST['Simpan'])) {
 
         <!-- Color -->
         <label for="color">Color:</label>
-        <input type="color" name="color" id="color" value="
-        <?php
+        <input type="color" name="color" id="color"
+            value="<?php 
 
-        // CHECK: if color cookie has been created, display color to input:color
-        if (isset($_COOKIE['color'])) {
-            echo $_COOKIE['color'];
-        } else {
-            echo "#000000";
-        }
-        ?>" required>
-        <br><br>
-
+            // CHECK: if color cookie has been created, display color to input:color
+                if(isset($_COOKIE['color'])){
+                    echo $_COOKIE['color'];
+                }else{
+                    echo "#000000";
+                }
+            ?>">
         <input type="submit" name="Simpan" value="Simpan">
     </form>
 </body>
