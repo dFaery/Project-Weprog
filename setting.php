@@ -1,97 +1,58 @@
 <?php
-// event handler for btn Submit
-if (isset($_POST['submit'])) {
-    // Get the value for each variable
+// Cek apakah tombol Simpan ditekan
+if (isset($_POST['Simpan'])) {
+    // Ambil data dari form
     $text_align = $_POST['text-align'];
     $font_family = $_POST['font-family'];
     $color = $_POST['color'];
 
-    // Make cookies, can use JSON?
-    setcookie("text-align", $text_align, time() + 180);
-    setcookie("font-family", $font_family, time() + 180);
-    setcookie("color", $color, time() + 180);
+    // Simpan ke dalam cookie selama 1 jam (3600 detik)
+    setcookie("text-align", $text_align, time() + 3600);
+    setcookie("font-family", $font_family, time() + 3600);
+    setcookie("color", $color, time() + 3600);
 
-    // auto refresh page when form submitted
-    header("Refresh:0");    
+    // Redirect ke halaman index
+    header("Location: index.php");
+    exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setting</title>
 </head>
-
 <body>
-    <!-- going back to index.php using input:submit -->
-    <form action="index.php" method="POST">
-        <h1>Halaman Setting</h1>
-        <div>
-            <!-- text-align value -->
-            <label for="text-align">Text-Align: </label>
-            <select name="text-align" id="text-align">
-                <option value="">
+    <h1>Halaman Setting</h1>
+    <form action="setting.php" method="POST">
+        <!-- Text-Align -->
+        <label for="text-align">Text-Align:</label>
+        <select name="text-align" id="text-align" required>
+            <option value="">-- Pilih Text-align --</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+            <option value="center">Center</option>
+            <option value="justify">Justify</option>
+        </select>
+        <br><br>
 
-                <!-- CHECK: if text-align cookie has been created, display text-align cookie to combobox -->
-                <?php
-                if(isset($_COOKIE['text-align']))
-                    echo $_COOKIE['text-align'];
-                else{
-                    echo "-- Pilih Text-align --";
-                }
-                ?>
+        <!-- Font-Family -->
+        <label for="font-family">Font-Family:</label>
+        <select name="font-family" id="font-family" required>
+            <option value="">-- Pilih Font --</option>
+            <option value="Arial">Arial</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Calibri">Calibri</option>
+        </select>
+        <br><br>
 
-                </option>
-                <option value="Left" >Left</option>
-                <option value="Right" >Right</option>
-                <option value="Center" >Center</option>
-                <option value="Justify" >Justify</option>
-            </select>
-        </div>
-        <br>
-        <div>
-            <!-- font-family value -->
-            <label for="font-family">Font-Family: </label>
-            <select name="font-family" id="font-family">
-                <option value="">
+        <!-- Color -->
+        <label for="color">Color:</label>
+        <input type="color" name="color" id="color" value="#000000" required>
+        <br><br>
 
-                <!-- CHECK: if font-family cookie has been created, display font-family cookie to combobox -->
-                <?php
-                if(isset($_COOKIE['font-family']))
-                echo $_COOKIE['font-family'];
-            else{
-                echo "-- Pilih font-family --";
-            }
-            ?>
-
-</option>
-<option value="Arial">Arial</option>
-<option value="Tahoma">Tahoma</option>
-<option value="Calibri">Calibri</option>
-</select>
-</div>
-
-<br>
-<div>
-    <!-- color value -->
-    <label for="color">Color: </label>
-            <input type="color" name="color" id="color"
-            value="<?php 
-
-            // CHECK: if color cookie has been created, display color to input:color
-                if(isset($_COOKIE['color'])){
-                    echo $_COOKIE['color'];
-                }else{
-                    echo "#000000";
-                }
-            ?>">
-        </div>
-        <br>
-        <input type="submit" value="submit" name="submit">
+        <input type="submit" name="Simpan" value="Simpan">
     </form>
-
 </body>
-
 </html>

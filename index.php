@@ -24,5 +24,6 @@
             <input type="submit" value="Lihat Setting" name="setting">
         </form>
     </div>
+
 </body>
 </html>
