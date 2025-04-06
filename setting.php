@@ -23,6 +23,59 @@ if (isset($_POST['Simpan'])) {
 <head>
     <meta charset="UTF-8">
     <title>Setting</title>
+    <style type="text/css">
+        #text-align{
+            text-align: <?php 
+                if(isset($_COOKIE['text-align'])){
+                    echo $_COOKIE['text-align'];
+                }else{
+                    echo "left";
+                }
+                ?>;
+            
+            font-family: <?php
+            if(isset($_COOKIE['font-family'])){
+                echo $_COOKIE['font-family'];
+            }else{
+                echo "Arial, sans-serif";
+            }
+            ?>;
+
+            color: <?php
+            if(isset($_COOKIE['color'])){
+                echo $_COOKIE['color'];
+            }else{
+                echo "#000000";
+            }
+            ?>;
+        }
+
+        #font-family{
+            text-align: <?php 
+                if(isset($_COOKIE['text-align'])){
+                    echo $_COOKIE['text-align'];
+                }else{
+                    echo "left";
+                }
+                ?>;
+            
+            font-family: <?php
+            if(isset($_COOKIE['font-family'])){
+                echo $_COOKIE['font-family'];
+            }else{
+                echo "Arial, sans-serif";
+            }
+            ?>;
+
+            color: <?php
+            if(isset($_COOKIE['color'])){
+                echo $_COOKIE['color'];
+            }else{
+                echo "#000000";
+            }
+            ?>;
+        }
+    </style>
 </head>
 
 <body>
