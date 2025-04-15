@@ -84,7 +84,12 @@ if (isset($_POST['Simpan'])) {
         <!-- Text-Align -->
         <label for="text-align">Text-Align:</label>
         <select name="text-align" id="text-align" required>
-            <option value="">
+            <option value="<?php
+                    if(isset($_COOKIE['text-align'])){
+                        echo $_COOKIE['text-align'];
+                    }else{
+                        echo "left";
+                    }?>">
 
                 <!-- CHECK: if text-align cookie has been created, display text-align cookie to combobox -->
                 <?php
@@ -106,7 +111,12 @@ if (isset($_POST['Simpan'])) {
         <!-- Font-Family -->
         <label for="font-family">Font-Family:</label>
         <select name="font-family" id="font-family" required>
-            <option value="">
+            <option value="<?php
+                    if(isset($_COOKIE['font-family'])){
+                        echo $_COOKIE['font-family'];
+                    }else{
+                        echo "Arial";
+                    }?>">  
 
                 <!-- CHECK: if font-family cookie has been created, display font-family cookie to combobox -->
                 <?php
