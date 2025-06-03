@@ -1,0 +1,41 @@
+/* Base Styles */
+:root {
+    --midnight-mirage: #001F3F;
+    --nuit-blanche: #1E488F;
+    --yellow-color: #D9E74C;
+    --mantis: #75C566;
+    --book-green: #00804C;
+    --praxeti-white: #F6F7ED;
+    --shadow-color: #D9D9D9;
+    --text-color: #000000;
+    --text-light: #fff;
+    --hover-color: #1b538b;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+h1, h2, h3, label {
+    font-family: 'Rubik One', cursive;
+}
+
+a {
+    text-decoration: none;
+}
