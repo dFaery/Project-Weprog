@@ -1,10 +1,9 @@
 <?php
-if (isset($_POST['Simpan'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validasi input
-    if (move_uploaded_file($_FILES['photo']['tmp_name'], "foto/" . $_FILES['photo']['name'])) {
-        $tujuan = "foto/" . $_FILES['photo']['name'];
+    if (move_uploaded_file($_FILES['foto']['tmp_name'], "foto/" . $_FILES['foto']['name'])) {
+        $tujuan = "foto/" . $_FILES['foto']['name'];
         session_start();
-        // Simpan data ke session
         $_SESSION['KodeMakanan'] = $_POST['KodeMakanan'];
         $_SESSION['Makanan'] = $_POST['Makanan'];
         $_SESSION['harga'] = $_POST['harga'];
@@ -23,8 +22,8 @@ if (isset($_POST['Simpan'])) {
     <title>PROSES UAS WEBPROG - ILO MATES</title>
 
     <!-- Custom CSS & Fonts -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rubik+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Rubik+One&display=swap" rel="stylesheet">
 </head>
 
 <body>

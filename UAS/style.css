@@ -1,4 +1,7 @@
 /* Base Styles */
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Rubik+One&display=swap");
+
+/* Color Variables */
 :root {
   --midnight-mirage: #001f3f;
   --nuit-blanche: #1e488f;
@@ -22,13 +25,58 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #fff;
-  color: var(--text-color);
-  line-height: 1.6;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: hsl(64, 100%, 92%);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  background: var(--praxeti-white);
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--midnight-mirage);
+  border: none;
+  border-radius: 6px;
+  color: var(--praxeti-white);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 h1,
@@ -57,7 +105,7 @@ a {
 }
 
 .card {
-  width: 18%; /* Untuk 5 card per baris, ganti jadi 23% jika hanya 4 card */
+  width: 250px; /* Untuk 5 card per baris, ganti jadi 23% jika hanya 4 card */
   border: 1px solid #aaa;
   border-radius: 4px;
   float: left;
