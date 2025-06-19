@@ -1,16 +1,18 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validasi input
-    if (move_uploaded_file($_FILES['foto']['tmp_name'], "foto/" . $_FILES['foto']['name'])) {
-        $tujuan = "foto/" . $_FILES['foto']['name'];
-        session_start();
-        $_SESSION['KodeMakanan'] = $_POST['KodeMakanan'];
-        $_SESSION['Makanan'] = $_POST['Makanan'];
-        $_SESSION['harga'] = $_POST['harga'];
-        $_SESSION['foto'] = $_FILES['foto'];
-    } else {
+    if (empty($_POST['KodeMakanan']) || empty($_POST['Makanan']) || empty($_POST['harga']) || empty($_FILES['foto']['name'])) {
+        echo "Semua field harus diisi.";
+        exit;
+    }elseif (!is_numeric($_POST['harga'])) {
+        echo "Harga harus berupa angka.";
+        exit;
+    } elseif ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
         echo "Gagal mengupload foto.";
+        exit;
     }
+    // Proses upload foto
+    $foto = $_FILES['foto'];
 }
 ?>
 <!DOCTYPE html>

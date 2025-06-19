@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="form-container">
+     <div class="form-container">
         <form action="order.php" method="POST" enctype="multipart/form-data">
             <label for="kodeMakanan">Kode Makanan:</label>
             <input type="text" id="kodeMakanan" name="KodeMakanan" required>
@@ -26,8 +26,8 @@
             <input type="text" id="harga" name="harga" required>
             <br>
     
-            <label for="foto">Foto Makanan:</label>
-            <input type="file" id="foto" name="foto" accept="image/jpeg, image/png" required>
+            <label for="foto">URL Foto Makanan:</label>
+            <input type="text" id="foto" name="foto" required>
             <br>
     
             <button type="submit">Submit</button>
