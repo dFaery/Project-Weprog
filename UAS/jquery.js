@@ -1,89 +1,37 @@
 $(document).ready(function () {
-  // Validasi saat form di-submit
-  $("#foodForm").on("submit", function (e) {
-    e.preventDefault();
-    clearErrors();
+  let total = 0;
+  const selectedItems = [];
 
-    let isValid = true;
-    const warningBox = $("#warningBox");
-    warningBox.hide();
+  $(".btn-pilih").click(function () {
+    const button = $(this);
+    const card = button.closest(".card");
+    const index = card.data("index");
+    const makanan = button.data("makanan");
+    const harga = parseInt(button.data("harga"));
 
-    // Validasi Kode Makanan
-    const kode = $("#kodeMakanan").val().trim();
-    if (kode === "") {
-      showError("kodeError", "Kode makanan harus diisi");
-      isValid = false;
-    }
+    // Nonaktifkan tombol
+    button.prop("disabled", true).text("Dipilih");
 
-    // Validasi Nama Makanan
-    const makanan = $("#makanan").val().trim();
-    if (makanan === "") {
-      showError("makananError", "Nama makanan harus diisi");
-      isValid = false;
-    }
+    // Tambahkan ke sidebar
+    selectedItems.push({ makanan, harga });
+    updateSidebar();
 
-    // Validasi Harga
-    const harga = $("#harga").val().trim();
-    if (harga === "") {
-      showError("hargaError", "Harga harus diisi");
-      isValid = false;
-    } else if (!/^\d+$/.test(harga)) {
-      showError("hargaError", "Harga harus berupa angka");
-      isValid = false;
-    }
-
-    // Validasi URL Foto
-    const foto = $("#foto").val().trim();
-    if (foto === "") {
-      showError("fotoError", "URL foto harus diisi");
-      isValid = false;
-    } else if (!isValidUrl(foto)) {
-      showError("fotoError", "URL foto tidak valid");
-      isValid = false;
-    }
-
-    if (!isValid) {
-      warningBox
-        .text(
-          "Terdapat kesalahan dalam pengisian form. Silakan perbaiki terlebih dahulu."
-        )
-        .show();
-      return false;
-    }
-
-    // Konfirmasi sebelum submit
-    if (confirm("Apakah Anda yakin ingin menyimpan data makanan ini?")) {
-      this.submit();
-    }
+    // Update total
+    total += harga;
+    $("#total-harga").text(total.toLocaleString("id-ID"));
   });
 
-  // Fungsi untuk menampilkan error
-  function showError(elementId, message) {
-    $("#" + elementId).text(message);
-  }
+  function updateSidebar() {
+    const container = $("#selected-items");
+    container.empty();
 
-  // Fungsi untuk menghapus semua error
-  function clearErrors() {
-    $(".error").text("");
+    selectedItems.forEach((item) => {
+      container.append(`
+         <div class="selected-item">
+            <strong>${item.makanan}</strong><br>
+            Rp ${item.harga.toLocaleString("id-ID")}
+          </div>
+          `);
+    });
   }
-
-  // Fungsi validasi URL
-  function isValidUrl(string) {
-    try {
-      new URL(string);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  // Validasi real-time untuk harga (hanya angka)
-  $("#harga").on("input", function () {
-    const value = $(this).val();
-    if (!/^\d*$/.test(value)) {
-      showError("hargaError", "Hanya boleh mengandung angka");
-    } else {
-      showError("hargaError", "");
-    }
-  });
 });

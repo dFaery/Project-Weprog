@@ -15,20 +15,37 @@ if (isset($_POST['submit'])) {
         exit();
     }
     if (empty($_POST['foto'])) {
-        echo"URL Foto Makanan kosong.";
+        echo "URL Foto Makanan kosong.";
         exit();
     }
 
-    $arrayData = array(
-        'kodeMakanan' => $_POST['kodeMakanan'],
-        'makanan' => $_POST['makanan'],
-        'harga' => $_POST['harga'],
-        'foto' => $_POST['foto']
-    );
-    $_SESSION['data'][] = $arrayData;
+    // Cek duplikasi berdasarkan kodeMakanan
+    $isDuplicate = false;
+    if (isset($_SESSION['data'])) {
+        foreach ($_SESSION['data'] as $item) {
+            if ($item['kodeMakanan'] === $_POST['kodeMakanan']) {
+                $isDuplicate = true;
+                break;
+            }
+        }
+    }
 
-    $listfinal = $_SESSION['data'];
-    
+    if (!$isDuplicate) {
+        $arrayData = array(
+            'kodeMakanan' => $_POST['kodeMakanan'],
+            'makanan' => $_POST['makanan'],
+            'harga' => $_POST['harga'],
+            'foto' => $_POST['foto']
+        );
+        $_SESSION['data'][] = $arrayData;
+
+        // Redirect untuk hindari duplikasi saat refresh
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo "Makanan dengan kode ini sudah ada";
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -36,10 +53,8 @@ if (isset($_POST['submit'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewportF" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROSES UAS WEBPROG - ILO MATES</title>
-
-    <!-- Custom CSS & Fonts -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Rubik+One&display=swap" rel="stylesheet">
 </head>
@@ -49,22 +64,30 @@ if (isset($_POST['submit'])) {
         <div class="menu">
             <!-- Card Makanan -->
             <?php
-            foreach ($listfinal as $key){
+            if (isset($_SESSION['data']) && !empty($_SESSION['data'])) {
+                foreach ($_SESSION['data'] as $key) {
+                    echo '<div class="card">';
+                    echo '<img src="' . $key['foto'] . '" alt="">';
+                    echo '<div>' . $key['makanan'] . '</div>';
+                    echo '<div>Rp. ' . $key['harga'] . '</div>';
+                    echo '<input type="submit" name="Pilih">';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>Belum ada data makanan</p>';
+            }
             ?>
-                <div class="card">
-                    <img src="<?php echo $key['foto'];?>" alt="">
-                    <div><?php echo $key['makanan']; ?></div>
-                    <div>Rp. <?php echo $key['harga']; ?></div>
-                    <button>Pilih</button>
-                </div>
-            <?php }?>
         </div>
     </div>
 
     <div class="sidebar">
         <h3>Pilihanku:</h3>
-        <!-- Daftar pilihan akan ditambahkan di sini -->
-    </div>
+        <div id="selected-items">
+            <!-- Item yang dipilih akan muncul di sini -->
+        </div>
+        <div class="total">
+            Total: Rp <span id="total-harga">0</span>
+        </div>
     </div>
 </body>
 
