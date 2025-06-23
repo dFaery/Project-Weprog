@@ -1,18 +1,34 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+session_start();
+if (isset($_POST['submit'])) {
     // Validasi input
-    if (empty($_POST['KodeMakanan']) || empty($_POST['Makanan']) || empty($_POST['harga']) || empty($_FILES['foto']['name'])) {
-        echo "Semua field harus diisi.";
-        exit;
-    }elseif (!is_numeric($_POST['harga'])) {
-        echo "Harga harus berupa angka.";
-        exit;
-    } elseif ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
-        echo "Gagal mengupload foto.";
-        exit;
+    if (empty($_POST['kodeMakanan'])) {
+        echo "Kode Makanan tidak boleh kosong.";
+        exit();
     }
-    // Proses upload foto
-    $foto = $_FILES['foto'];
+    if (empty($_POST['makanan'])) {
+        echo "Nama Makanan tidak boleh kosong.";
+        exit();
+    }
+    if (empty($_POST['harga']) || !is_numeric($_POST['harga'])) {
+        echo "Harga Makanan harus berupa angka.";
+        exit();
+    }
+    if (empty($_POST['foto'])) {
+        echo"URL Foto Makanan kosong.";
+        exit();
+    }
+
+    $arrayData = array(
+        'kodeMakanan' => $_POST['kodeMakanan'],
+        'makanan' => $_POST['makanan'],
+        'harga' => $_POST['harga'],
+        'foto' => $_POST['foto']
+    );
+    $_SESSION['data'][] = $arrayData;
+
+    $listfinal = $_SESSION['data'];
+    
 }
 ?>
 <!DOCTYPE html>
@@ -33,55 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="menu">
             <!-- Card Makanan -->
             <?php
-            for ($i = 0; $i < 5; $i++) {
-                echo "<div class='card'>";
-                echo "<img src='https://via.placeholder.com/200' alt='Makanan'>";
-                echo "<div>Makanan " . ($i + 1) . "</div>";
-                echo "<div>Rp. " . (10000 * ($i + 1)) . "</div>";
-                echo "<button>Pilih</button>";
-                echo "</div>";
-            }
+            foreach ($listfinal as $key){
             ?>
-            <div class="card">
-                <?php
-                echo "<img src='$tujuan' width='200px'>";
-                ?>
-                <div><?php echo $_POST['Makanan']; ?></div>
-                <div>Rp. <?php echo $_POST['harga']; ?></div>
-                <button>Pilih</button>
-            </div>
-            <div class="card">
-                <?php
-                echo "<img src='$tujuan' width='200px'>";
-                ?>
-                <div><?php echo $_POST['Makanan']; ?></div>
-                <div>Rp. <?php echo $_POST['harga']; ?></div>
-                <button>Pilih</button>
-            </div>
-            <div class="card">
-                <?php
-                echo "<img src='$tujuan' width='200px'>";
-                ?>
-                <div><?php echo $_POST['Makanan']; ?></div>
-                <div>Rp. <?php echo $_POST['harga']; ?></div>
-                <button>Pilih</button>
-            </div>
-            <div class="card">
-                <?php
-                echo "<img src='$tujuan' width='200px'>";
-                ?>
-                <div><?php echo $_POST['Makanan']; ?></div>
-                <div>Rp. <?php echo $_POST['harga']; ?></div>
-                <button>Pilih</button>
-            </div>
-            <div class="card">
-                <?php
-                echo "<img src='$tujuan' width='200px'>";
-                ?>
-                <div><?php echo $_POST['Makanan']; ?></div>
-                <div>Rp. <?php echo $_POST['harga']; ?></div>
-                <button>Pilih</button>
-            </div>
+                <div class="card">
+                    <img src="<?php echo $key['foto'];?>" alt="">
+                    <div><?php echo $key['makanan']; ?></div>
+                    <div>Rp. <?php echo $key['harga']; ?></div>
+                    <button>Pilih</button>
+                </div>
+            <?php }?>
         </div>
     </div>
 
@@ -90,10 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Daftar pilihan akan ditambahkan di sini -->
     </div>
     </div>
-</body>
-
-</html>
-
 </body>
 
 </html>

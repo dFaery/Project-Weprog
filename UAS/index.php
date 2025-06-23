@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,32 +13,49 @@
     <!-- Custom CSS & Fonts -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Rubik+One&display=swap" rel="stylesheet">
+
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        .warning-box {
+            padding: 10px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
      <div class="form-container">
-        <form action="order.php" method="POST" enctype="multipart/form-data">
+        <form action="order.php" method="POST" >
             <label for="kodeMakanan">Kode Makanan:</label>
-            <input type="text" id="kodeMakanan" name="kodeMakanan" required>
+            <input type="text" id="kodeMakanan" name="kodeMakanan" >
             <br>
 
             <label for="makanan">Makanan:</label>
-            <input type="text" id="makanan" name="makanan" required>
+            <input type="text" id="makanan" name="makanan" >
             <br>
 
             <label for="harga">Harga Makanan:</label>
-            <input type="number" id="harga" name="harga" required>
+            <input type="number" id="harga" name="harga" >
             <br>
 
             <label for="foto">URL Foto Makanan:</label>
-            <input type="url" id="foto" name="foto" required>
+            <input type="url" id="foto" name="foto" >
             <br>
 
-            <button type="submit">Submit</button>
+            <input type="submit" name="submit">
         </form>
     </div>
 
-    <script src="jquery.js"></script>
+    <!-- <script src="jquery.js"></script> -->
 </body>
 
 </html>
