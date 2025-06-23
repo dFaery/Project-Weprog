@@ -15,21 +15,21 @@
      <div class="form-container">
         <form action="order.php" method="POST" enctype="multipart/form-data">
             <label for="kodeMakanan">Kode Makanan:</label>
-            <input type="text" id="kodeMakanan" name="KodeMakanan" required>
+            <input type="text" id="kodeMakanan" name="kodeMakanan" required>
             <br>
-    
-            <label for="Makanan">Makanan:</label>
-            <input type="text" id="Makanan" name="Makanan" required>
+
+            <label for="makanan">Makanan:</label>
+            <input type="text" id="makanan" name="makanan" required>
             <br>
-    
+
             <label for="harga">Harga Makanan:</label>
-            <input type="text" id="harga" name="harga" required>
+            <input type="number" id="harga" name="harga" required>
             <br>
-    
+
             <label for="foto">URL Foto Makanan:</label>
-            <input type="text" id="foto" name="foto" required>
+            <input type="url" id="foto" name="foto" required>
             <br>
-    
+
             <button type="submit">Submit</button>
         </form>
     </div>

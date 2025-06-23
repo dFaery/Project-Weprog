@@ -32,6 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="wrapper">
         <div class="menu">
             <!-- Card Makanan -->
+            <?php
+            for ($i = 0; $i < 5; $i++) {
+                echo "<div class='card'>";
+                echo "<img src='https://via.placeholder.com/200' alt='Makanan'>";
+                echo "<div>Makanan " . ($i + 1) . "</div>";
+                echo "<div>Rp. " . (10000 * ($i + 1)) . "</div>";
+                echo "<button>Pilih</button>";
+                echo "</div>";
+            }
+            ?>
             <div class="card">
                 <?php
                 echo "<img src='$tujuan' width='200px'>";
