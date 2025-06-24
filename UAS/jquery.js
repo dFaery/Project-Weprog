@@ -1,3 +1,16 @@
+$("submit").click(function () {
+  var kodeMakanan = $("kodeMakanan").val();
+  var kodeMakanan = $("kodeMakanan").val();
+  var kodeMakanan = $("kodeMakanan").val();
+  var kodeMakanan = $("kodeMakanan").val();
+  
+
+  if (kata == "") alert("Kode makanan tidak boleh kosong");
+  else if (kata == "") alert("Kode makanan tidak boleh kosong");
+  else if (kata == "") alert("Kode makanan tidak boleh kosong");
+  else if (kata == "") alert("Kode makanan tidak boleh kosong");
+  else alert(kata);
+});
 $(document).ready(function () {
   let total = 0;
   const selectedItems = [];

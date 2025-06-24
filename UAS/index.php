@@ -52,10 +52,11 @@ session_start();
             <br>
 
             <input type="submit" name="submit">
+            <input type="submit" name="lihat list makanan" value="Lihat List Makanan">
         </form>
     </div>
 
-    <!-- <script src="jquery.js"></script> -->
+    <script src="jquery.js"></script>
 </body>
 
 </html>
