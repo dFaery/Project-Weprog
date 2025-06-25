@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    //jika isDuplicate == false
     if (!$isDuplicate) {
         $arrayData = array(
             'kodeMakanan' => $_POST['kodeMakanan'],
@@ -37,7 +38,7 @@ if (isset($_POST['submit'])) {
             'harga' => $_POST['harga'],
             'foto' => $_POST['foto']
         );
-        $_SESSION['data'][] = $arrayData;
+        $_SESSION['data'][] = $arrayData;        
 
         // Redirect untuk hindari duplikasi saat refresh
         header("Location: " . $_SERVER['PHP_SELF']);
@@ -62,18 +63,30 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="wrapper">
         <div class="menu">
-            <!-- Card Makanan -->
             <?php
+            // Periksa jika session 'data' tidak kosong.
             if (isset($_SESSION['data']) && !empty($_SESSION['data'])) {
+                // Loop melalui setiap item di session 'data' untuk menampilkannya.
+                // Menggunakan '$item' sebagai nama variabel lebih deskriptif daripada '$key'.
                 foreach ($_SESSION['data'] as $key) {
+                    // Setiap item makanan dibungkus dalam div dengan class 'card'.
                     echo '<div class="card">';
+                    // Tampilkan gambar. 'alt' penting untuk aksesibilitas dan SEO.
                     echo '<img src="' . $key['foto'] . '" alt="">';
-                    echo '<div>' . $key['makanan'] . '</div>';
-                    echo '<div>Rp. ' . $key['harga'] . '</div>';
-                    echo '<input type="submit" name="Pilih">';
+                    // Tampilkan nama makanan.
+                    echo '<div class="nama-makanan">' . $key['makanan'] . '</div>';
+                    
+                    echo '<div class="harga-makanan">Rp. ' . $key['harga'] . '</div>';
+                    
+                    echo '<button type="submit" value="Pilih" class="btn-pilih-makanan" 
+                    data-nama="' . $key['makanan'] . '" 
+                    data-harga="' . $key['harga'] . '"
+                    data-kode="' . $key['kodeMakanan'] .'
+                    disabled=false">Pilih</button>';
+                    
                     echo '</div>';
                 }
-            } else {
+            } else {                
                 echo '<p>Belum ada data makanan</p>';
             }
             ?>
@@ -81,14 +94,67 @@ if (isset($_POST['submit'])) {
     </div>
 
     <div class="sidebar">
-        <h3>Pilihanku:</h3>
-        <div id="selected-items">
-            <!-- Item yang dipilih akan muncul di sini -->
-        </div>
+        <h3 style="font-weight: 100;">Pilihanku:</h3>
+        <ul id="selected-items">
+        </ul>
         <div class="total">
             Total: Rp <span id="total-harga">0</span>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>        
+        // Memastikan script ini berjalan HANYA SETELAH seluruh halaman HTML selesai dimuat.
+        $(document).ready(function() {
+            
+            let totalHarga = 0;
+
+            //menyimpan kode makanan yang dipilih
+            const cart = [];
+
+            $(".btn-pilih-makanan").click(function() {                                              
+                //Dari card yang dipilih, cari nama makanan dan harganya
+                //pakai cara yang diajarin di kelas
+                const kodeMakanan = $(this).attr('data-kode');
+                const namaMakanan = $(this).attr('data-nama');
+                const hargaMakanan = parseInt($(this).attr('data-harga'));    
+
+                //atau bisa juga pakai .data() --> ini ambil attribute dengan nama data-...
+                //kalau attributenya adalah int yang solid, maka variable yang menggunakan .data() akan langsung menyimpan int tanpa perlu parseInt()                
+                // const kodeMakanan = $(this).data('kode');
+                // const namaMakanan = $(this).data('nama');
+                // const hargaMakanan = $(this).data('harga');     
+                                
+                //cek apakah di cart ada kodeMakanan yang dipilih
+                if (!cart[kodeMakanan]) {
+                    // Jika belum ada, buat data baru di cart
+                    cart[kodeMakanan] = {
+                        nama: namaMakanan,
+                        harga: hargaMakanan                        
+                    };
+                    //tambah list baru di section sidebar
+                    //toLocaleString  ngeformat angka menjadi format tertentu --> disini format ke rupiah 
+                    $("#selected-items").append('<li data-nama="' + namaMakanan + '">' + namaMakanan + ' (Rp. ' + hargaMakanan.toLocaleString('id-ID')+ ')');
+                }                
+                                
+                //hitung total harganya
+                totalHarga += hargaMakanan;
+
+                //ketika button submit diklik, maka gabisa diklik lagi
+                $(this).attr('disabled', true);
+                $(this).html("Terpilih")
+                $(this).css({
+                    'background-color':'#7B7B7C',
+                    'cursor':'not-allowed'
+                });
+
+                //Buat update tampilan total harga                                
+                //toLocaleString  ngeformat angka menjadi format tertentu --> disini format ke rupiah                
+                $("#total-harga").html(totalHarga.toLocaleString('id-ID'));
+
+            });
+        });        
+    </script>
 </body>
 
 </html>

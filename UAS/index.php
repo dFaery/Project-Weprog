@@ -51,12 +51,22 @@ session_start();
             <input type="url" id="foto" name="foto" >
             <br>
 
-            <input type="submit" name="submit">
-            <input type="submit" name="lihat list makanan" value="Lihat List Makanan">
+            <input type="submit" name="submit" id="submit-makanan">
+            <input type="submit" name="lihat_list_makanan" value="Lihat List Makanan">                        
         </form>
     </div>
-
-    <script src="jquery.js"></script>
+   
+    <script src="Js/jquery-3.5.1.min.js"></script>
+    <script>
+        $("#submit-makanan").click(function(){
+            var kodeMakanan = $("#kodeMakanan").val();
+            var namaMakanan = $("#makanan").val();
+            var hargaMakanan = parseInt($("#harga").val());
+            var foto = $("#foto").val();
+            
+            alert(namaMakanan + " : "+hargaMakanan);
+        })
+    </script>
 </body>
 
 </html>
