@@ -56,7 +56,7 @@ session_start();
         </form>
     </div>
    
-    <script src="Js/jquery-3.5.1.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
     <script>
         $("#submit-makanan").click(function(){
             var kodeMakanan = $("#kodeMakanan").val();
@@ -64,7 +64,7 @@ session_start();
             var hargaMakanan = parseInt($("#harga").val());
             var foto = $("#foto").val();
             
-            alert(namaMakanan + " : "+hargaMakanan);
+            alert("Berhasil menambahkan "+namaMakanan);
         })
     </script>
 </body>

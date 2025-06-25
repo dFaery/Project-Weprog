@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
     <script>        
         // Memastikan script ini berjalan HANYA SETELAH seluruh halaman HTML selesai dimuat.
         $(document).ready(function() {
