@@ -63,9 +63,10 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="wrapper">
         <div class="menu">
+            <!-- card makanan -->
             <?php
             // Periksa jika session 'data' tidak kosong.
-            if (isset($_SESSION['data']) && !empty($_SESSION['data'])) {
+            if (isset($_SESSION['data'])) {
                 // Loop melalui setiap item di session 'data' untuk menampilkannya.
                 // Menggunakan '$item' sebagai nama variabel lebih deskriptif daripada '$key'.
                 foreach ($_SESSION['data'] as $key) {
@@ -74,9 +75,9 @@ if (isset($_POST['submit'])) {
                     // Tampilkan gambar. 'alt' penting untuk aksesibilitas dan SEO.
                     echo '<img src="' . $key['foto'] . '" alt="">';
                     // Tampilkan nama makanan.
-                    echo '<div class="nama-makanan">' . $key['makanan'] . '</div>';
+                    echo '<div>' . $key['makanan'] . '</div>';
                     
-                    echo '<div class="harga-makanan">Rp. ' . $key['harga'] . '</div>';
+                    echo '<div>Rp. ' . $key['harga'] . '</div>';
                     
                     echo '<button type="submit" value="Pilih" class="btn-pilih-makanan" 
                     data-nama="' . $key['makanan'] . '" 

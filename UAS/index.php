@@ -54,19 +54,7 @@ session_start();
             <input type="submit" name="submit" id="submit-makanan">
             <input type="submit" name="lihat_list_makanan" value="Lihat List Makanan">                        
         </form>
-    </div>
-   
-    <script src="jquery-3.5.1.min.js"></script>
-    <script>
-        $("#submit-makanan").click(function(){
-            var kodeMakanan = $("#kodeMakanan").val();
-            var namaMakanan = $("#makanan").val();
-            var hargaMakanan = parseInt($("#harga").val());
-            var foto = $("#foto").val();
-            
-            alert("Berhasil menambahkan "+namaMakanan);
-        })
-    </script>
+    </div>    
 </body>
 
 </html>

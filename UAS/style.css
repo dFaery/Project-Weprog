@@ -26,14 +26,13 @@
 body {
   font-family: "Inter", sans-serif;
   background-color: hsl(64, 100%, 92%);
-  margin: 0;
+  margin: 0;  
   padding: 0;
-  padding-left: 36px;
-  padding-right: 36px;
+  padding: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .form-container {
@@ -119,16 +118,13 @@ a {
 
 /* Cards Style */
 .wrapper {
-  width: 100%;
-  margin-right: 36px;  
-  max-width: 1000px; 
-  /* margin: 0 auto; Membuat wrapper berada di tengah */
-  padding: 15px; /* Mengurangi padding */
+  display: inline-block; /* Penting: agar width menyesuaikan isi */
+  padding: 15px;
   box-sizing: border-box;
   background-color: lightcyan;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow lebih halus */
-  border: none; /* Menghilangkan border solid */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: none;  
 }
 
 .menu {
@@ -137,11 +133,12 @@ a {
   gap: 15px; /* Jarak antar card */
   justify-content: flex-start; /* Rata kiri */
   padding: 10px;
+  max-width: calc(4 * 200px + 3 * 15px + 24px); /* 4 card + 3 gap */
 }
 
 .card {
   text-align: center;
-  width: 200px;
+  min-width: 200px; /* Lebar minimum card */
   padding: 12px;
   border: 1px solid #e0e0e0; /* Border lebih halus */
   border-radius: 8px;
@@ -187,7 +184,7 @@ a {
 
 /* Sidebar style */
 .sidebar {
-  flex: 1;
+  flex: 1; 
   padding: 15px 30px;  
   background: white;
   border-radius: 8px;
