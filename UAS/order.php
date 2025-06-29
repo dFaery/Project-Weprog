@@ -61,45 +61,48 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="menu">
-            <!-- card makanan -->
-            <?php
-            // Periksa jika session 'data' tidak kosong.
-            if (isset($_SESSION['data'])) {
-                // Loop melalui setiap item di session 'data' untuk menampilkannya.
-                // Menggunakan '$item' sebagai nama variabel lebih deskriptif daripada '$key'.
-                foreach ($_SESSION['data'] as $key) {
-                    // Setiap item makanan dibungkus dalam div dengan class 'card'.
-                    echo '<div class="card">';
-                    // Tampilkan gambar. 'alt' penting untuk aksesibilitas dan SEO.
-                    echo '<img src="' . $key['foto'] . '" alt="">';
-                    // Tampilkan nama makanan.
-                    echo '<div>' . $key['makanan'] . '</div>';
-                    
-                    echo '<div>Rp. ' . $key['harga'] . '</div>';
-                    
-                    echo '<button type="submit" value="Pilih" class="btn-pilih-makanan" 
-                    data-nama="' . $key['makanan'] . '" 
-                    data-harga="' . $key['harga'] . '"
-                    data-kode="' . $key['kodeMakanan'] .'
-                    disabled=false">Pilih</button>';
-                    
-                    echo '</div>';
-                }
-            } else {                
-                echo '<p>Belum ada data makanan</p>';
-            }
-            ?>
-        </div>
-    </div>
+    <div class="container">
 
-    <div class="sidebar">
-        <h3 style="font-weight: 100;">Pilihanku:</h3>
-        <ul id="selected-items">
-        </ul>
-        <div class="total">
-            Total: Rp <span id="total-harga">0</span>
+        <div class="wrapper">
+            <div class="menu">
+                <!-- card makanan -->
+                <?php
+                // Periksa jika session 'data' tidak kosong.
+                if (isset($_SESSION['data'])) {
+                    // Loop melalui setiap item di session 'data' untuk menampilkannya.
+                    // Menggunakan '$item' sebagai nama variabel lebih deskriptif daripada '$key'.
+                    foreach ($_SESSION['data'] as $key) {
+                        // Setiap item makanan dibungkus dalam div dengan class 'card'.
+                        echo '<div class="card">';
+                        // Tampilkan gambar. 'alt' penting untuk aksesibilitas dan SEO.
+                        echo '<img src="' . $key['foto'] . '" alt="">';
+                        // Tampilkan nama makanan.
+                        echo '<div>' . $key['makanan'] . '</div>';
+                        
+                        echo '<div>Rp. ' . $key['harga'] . '</div>';
+                        
+                        echo '<button type="submit" value="Pilih" class="btn-pilih-makanan" 
+                        data-nama="' . $key['makanan'] . '" 
+                        data-harga="' . $key['harga'] . '"
+                        data-kode="' . $key['kodeMakanan'] .'
+                        disabled=false">Pilih</button>';
+                        
+                        echo '</div>';
+                    }
+                } else {                
+                    echo '<p>Belum ada data makanan</p>';
+                }
+                ?>
+            </div>
+        </div>
+    
+        <div class="sidebar">
+            <h3 style="font-weight: 100;">Pilihanku:</h3>
+            <ul id="selected-items">
+            </ul>
+            <div class="total">
+                Total: Rp <span id="total-harga">0</span>
+            </div>
         </div>
     </div>
 
